@@ -37,7 +37,6 @@ def save_data():
                                                     f'Password: {pwd_info}\n Are you sure?')
         if ok_to_save:
             try:
-                keep_entries = False
                 with open('data.json', 'r') as data_file:
                     data = json.load(data_file)
 
@@ -46,9 +45,6 @@ def save_data():
                                                                               "database. Do you want to "
                                                                               "overwrite?"):
                             data.update(new_data)
-                        else:
-                            keep_entries = True
-
                     else:
                         data.update(new_data)
             except FileNotFoundError:
@@ -60,11 +56,8 @@ def save_data():
                     website_entry.delete(0, END)
                     pwd_entry.delete(0, END)
             finally:
-                if keep_entries:
-                    pass
-                else:
-                    website_entry.delete(0, END)
-                    pwd_entry.delete(0, END)
+                website_entry.delete(0, END)
+                pwd_entry.delete(0, END)
 
 
 # ---------------------------- Search Data ------------------------------- #
